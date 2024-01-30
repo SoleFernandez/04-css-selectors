@@ -1,0 +1,148 @@
+/* .synopsis {
+    color: #7e8184; /* Light gray */
+    /* font-style: italic; 
+} */
+
+
+
+
+/* The :first-of-type and :last-of-type selectors only operate inside their parent element. That is to say, p:first-of-type selects the first <p> in every container element. */
+
+/* p:first-of-type */
+.page > p:first-of-type { 
+    color: #7E8184;
+    font-style: italic;
+  }
+
+  /* There’s pros and cons to using this method over plain old classes. For instance, this only works if our synopsis is a <p> element. If we ever wanted to create a multi-paragraph synopsis by wrapping a bunch of <p> elements in a <div class='synopsis'>, we’d have to rewrite our CSS accordingly. On the other hand, the pseudo-class method lets us style specific elements without having to alter the HTML at all. This gives us a very clean separation of content from presentation. */
+
+  #button-2 {
+    background-color: #D55C5F;    /* Red */
+  }
+  /* ID selectors have higher specificity than class selectors, so this will turn our second button red even though we try to set the background-color with .call-to-action:link later in our stylesheet. 
+  
+  The whole “order matters” concept only works when all your rules have the same specificity. */
+
+
+
+.button,
+.button:link,
+.button:visited {
+    display:block;
+    text-decoration: none;
+    color: #fff;
+    background-color: #5995da; /* Blue */
+    font-weight: bold;
+    padding: 20px;
+    text-align: center;
+    border: 2px solid #6d6063; /* Dark gray */
+    border-radius: 5px;
+    width: 200px;
+    margin: 20px auto;
+}
+/* We need to change the <a> element to a block element and remove some of the default link styling. */
+
+/* It’s supposed to have a yellow background, but we broke it with the code from the previous section. Our .button:link selector was more “specific” than our current .call-to-action rule, so it took precedence.  */
+
+.page {
+    width: 600px;
+    margin: 0 auto;
+}
+.call-to-action {
+    font-style: italic;
+    background-color: #eeb75a; /* Yellow */
+}
+/* Overriding occurs because of the order of .call-to-action and .button in our stylesheet. When there’s two conflicting properties in a CSS file, the last one is always the one that gets applied */
+
+/* The “descendant selectors” let you target only those elements that are inside of another element. */
+.synopsis em {
+    font-style: normal;
+}
+
+/* Descendant selectors aren’t limited to class selectors—you can combine any other group of selectors this way. For instance, if we wanted to select only <em> elements inside of headings, we might use something like this: */
+
+/* h1 em {
+  Some other styles
+ } */ 
+
+a:link {
+    color: blue;
+    text-decoration: none;
+}
+a:visited {
+    color: purple;
+}
+a:hover {
+    color: aqua;
+    text-decoration: underline;
+}
+a:active {
+    color: red;
+}
+
+/* This creates a dedicated hover style for visited links. Hovering over an unvisited link changes it to aqua, while hovering over a visited link will turn it orange. */
+
+a:visited:hover {
+    color: orange;
+}
+a:visited:active {
+    color: red;
+}
+
+.button:hover,
+.button:visited:hover {
+    color: #fff;
+    background-color: #76aeed; /* Light blue */
+}
+.button:active,
+.button:visited:active {
+    color: #fff;
+    background-color: #5995da; /* Blue */
+}
+
+.call-to-action:link,
+.call-to-action:visited {
+  font-style: italic;
+  background-color: #EEB75A;     /* Yellow */
+}
+
+.call-to-action:hover,
+.call-to-action:visited:hover {
+  background-color: #F5CF8E;     /* Light yellow */
+}
+
+.call-to-action:active,
+.call-to-action:visited:active {
+  background-color: #EEB75A;     /* Yellow */
+}
+
+p:last-of-type {
+    margin-bottom: 50px;
+}
+
+#button-2 {
+    color: #5d6063; /* Dark gray */
+}
+/* The problem is, if we wanted to share this style with another button, we’d have to give it another unique id attribute. Pretty soon, our CSS would start to look pretty gnarly. 
+For this reason, ID selectors are generally frowned upon. Use class selectors instead. */
+
+.call-to-action:link,
+.call-to-action:visited {
+  background-color: #D55C5F;    /* Red */
+}
+
+/* The specificity of selectors we’ve seen in this chapter are show below, from greatest to least:
+
+#button-2
+
+.button:link
+
+a:link and .synopsis em (they’re equal)
+
+.button
+
+a */
+
+/* BEM attempts to make CSS rules more reusable by making everything a class selector. This completely eliminates the potential for specificity issues. */
+
+/* The takeaway here is that CSS rules are not necessarily applied in sequential order, but you should try to make the browser do so by writing CSS that uses the same specificity. */
